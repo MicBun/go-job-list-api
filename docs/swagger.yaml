@@ -1,0 +1,126 @@
+definitions:
+  controllers.LoginInput:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    required:
+    - password
+    - username
+    type: object
+  models.Job:
+    properties:
+      company:
+        type: string
+      company_logo:
+        type: string
+      company_url:
+        type: string
+      created_at:
+        type: string
+      description:
+        type: string
+      how_to_apply:
+        type: string
+      id:
+        type: string
+      location:
+        type: string
+      title:
+        type: string
+      type:
+        type: string
+      url:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /jobs:
+    get:
+      description: get job list from api
+      parameters:
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Description
+        in: query
+        name: description
+        type: string
+      - description: Location
+        in: query
+        name: location
+        type: string
+      - description: Full Time
+        in: query
+        name: full_time
+        type: string
+      - description: Page
+        in: query
+        name: page
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Job'
+            type: array
+      security:
+      - BearerToken: []
+      summary: Get job list from api
+      tags:
+      - Jobs
+  /jobs/{id}:
+    get:
+      description: get job detail from api
+      parameters:
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Job ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Job'
+      security:
+      - BearerToken: []
+      summary: Get job detail from api
+      tags:
+      - Jobs
+  /login:
+    post:
+      description: Logging in to get jwt token to access admin or user api by roles.
+      parameters:
+      - description: the body to login a user
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.LoginInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Login with credential.
+      tags:
+      - Auth
+swagger: "2.0"
