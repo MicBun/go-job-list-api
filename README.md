@@ -22,7 +22,21 @@ go job list api that return response from http://dev3.dansmultipro.co.id/api/rec
     2. `./app`
 4. access http://localhost:8080/swagger/index.html#/
 5. The app is ready to use.
+---
+### How to use with Go Run
+1. Clone this Repository using `git clone`
+2. Check config/db.go for the commented out code and adjust accordingly
+3. use CMD Command on this project root
+    1. `go run main.go`
+4. access http://localhost:8080/swagger/index.html#/
+5. The app is ready to use.
 
-The live demo is available at https://micbun-golang-activity-api.onrender.com/swagger/index.html
+---
+### Database
+1. Create a database named `simple_todo`
+2. It will automatically create the tables using gorm
+3. Insert username and password to the `users` table
+---
+
 
 For more information, please contact me LinkedIn: https://www.linkedin.com/in/MicBun
